@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <title>Meter Reader</title>
+</head>
+<body>
+  <h1>ทดลองกล้อง</h1>
+  <img src="/video" width="640" alt="ภาพสดจากกล้อง">
+  <p>
+    <button id="capture">ถ่ายภาพ + บันทึก Drive/Sheets</button>
+    <button id="zoom-out">ซูมออก</button>
+    <button id="zoom-in">ซูมเข้า</button>
+  </p>
+  <pre id="result">{{ latest }}</pre>
+  <script>
+    async function post(path) {
+      const response = await fetch(path, {method: "POST"});
+      const result = await response.json();
+      document.getElementById("result").textContent =
+        JSON.stringify(result, null, 2);
+    };
+    document.getElementById("capture").onclick = () => post("/capture");
+    document.getElementById("zoom-in").onclick = () => post("/zoom/in");
+    document.getElementById("zoom-out").onclick = () => post("/zoom/out");
+  </script>
+</body>
+</html>

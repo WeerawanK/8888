@@ -1,0 +1,16 @@
+[Unit]
+Description=ESP32-S3 meter camera controller
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=noey
+WorkingDirectory=/home/noey/meter-controller
+EnvironmentFile=/home/noey/meter-controller/.env
+ExecStart=/home/noey/meter-controller/.venv/bin/python /home/noey/meter-controller/app.py
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
